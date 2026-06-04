@@ -131,7 +131,7 @@ function App() {
         {!isLoading && !error && weatherData && <SuccessState />}
 
         <footer className="mt-8 text-slate-500 text-xs text-center max-w-xs leading-relaxed">
-          Powered by Open-Meteo API • Local Timezone Tracking
+          Datos de Open-Meteo • Sincronizado con tu hora local
         </footer>
       </div>
     </div>
