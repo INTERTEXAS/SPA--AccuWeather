@@ -122,7 +122,7 @@ function App() {
         {/* Branding Header */}
         <div className="mb-4">
           <span className="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-blue-500/20">
-            Weather App Alpha
+            Weather App Alpha (Auto-Deploy Active)
           </span>
         </div>
 
