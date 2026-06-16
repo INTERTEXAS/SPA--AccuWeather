@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
-/**
- * Weather Alpha SPA
- * Senior Frontend Engineer implementation using React & Tailwind CSS.
- */
 function App() {
   // --- Architecture de Estado ---
   const [location] = useState("Campeche, MX");
   const [weatherData, setWeatherData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const API_URL = "https://api.open-meteo.com/v1/forecast?latitude=19.8301&longitude=-90.5349&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m&timezone=auto";
-
   // --- Data Fetching ---
   const fetchWeather = async () => {
     setIsLoading(true);
@@ -30,20 +23,16 @@ function App() {
       setIsLoading(false);
     }
   };
-
   useEffect(() => {
     fetchWeather();
   }, []);
-
   // --- Helper: Formato de Fecha ---
   const currentDate = new Intl.DateTimeFormat('es-MX', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
   }).format(new Date());
-
   // --- UI Components ---
-
   // Estado 1: Carga (Skeletons)
   const LoadingState = () => (
     <div className="w-full max-w-md mx-auto rounded-3xl shadow-2xl bg-slate-800 overflow-hidden animate-pulse">
@@ -59,14 +48,13 @@ function App() {
       </div>
     </div>
   );
-
   // Estado 2: Error
   const ErrorState = () => (
     <div className="w-full max-w-md mx-auto rounded-3xl shadow-2xl bg-red-900/20 border-2 border-red-500 p-8 text-center space-y-4">
       <div className="text-red-500 text-5xl">⚠️</div>
       <h2 className="text-xl font-bold">Error de Conexión</h2>
       <p className="text-slate-400">{error}</p>
-      <button 
+      <button
         onClick={fetchWeather}
         className="px-6 py-2 bg-red-600 hover:bg-red-500 transition-colors rounded-full font-semibold"
       >
@@ -74,7 +62,6 @@ function App() {
       </button>
     </div>
   );
-
   // Estado 3: Éxito
   const SuccessState = () => {
     const { current, current_units } = weatherData;
@@ -85,7 +72,6 @@ function App() {
           <h1 className="text-2xl font-bold tracking-tight">{location}</h1>
           <p className="text-slate-400 capitalize">{currentDate}</p>
         </div>
-
         {/* Center Block: Temperatura Principal */}
         <div className="bg-gradient-to-br from-blue-500 to-indigo-600 py-12 flex flex-col items-center justify-center relative">
           <span className="text-8xl font-black drop-shadow-lg">
@@ -95,7 +81,6 @@ function App() {
             Actual
           </p>
         </div>
-
         {/* Bottom Block: Cuadrícula de Detalles */}
         <div className="grid grid-cols-3 divide-x divide-slate-700 bg-slate-900/50 p-6">
           <div className="flex flex-col items-center">
@@ -114,7 +99,6 @@ function App() {
       </div>
     );
   };
-
   // --- Main Render ---
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4 md:p-8 font-sans">
@@ -129,7 +113,6 @@ function App() {
         {isLoading && <LoadingState />}
         {error && <ErrorState />}
         {!isLoading && !error && weatherData && <SuccessState />}
-
         <footer className="mt-8 text-slate-500 text-xs text-center max-w-xs leading-relaxed">
           Datos de Open-Meteo • Sincronizado con tu hora local
         </footer>
